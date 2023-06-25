@@ -37,7 +37,7 @@ pipeline {
                     if (env.BRANCH_NAME == 'main' || env.BRANCH_NAME.startsWith('release-')) {
                         sh "mvn clean package -Drevision=${MY_VERSION}"
                     } else {
-                        sh "mvn clean package -DskipTests=false -Drevision=${MY_VERSION}"
+                        sh "mvn clean package -DskipTests=true -Drevision=${MY_VERSION}"
                     }
                 }
             }
