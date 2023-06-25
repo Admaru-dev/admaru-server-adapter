@@ -57,7 +57,7 @@ pipeline {
                         extraVars: [
                             hosts: "applications_${env.MY_ENV}",
                             envName: "${env.MY_ENV}",
-                            artifactPath: "${env.WORKSPACE}/target/prebid-server-${MY_VERSION}.jar",
+                            artifactPath: "${env.WORKSPACE}/target/prebid-server.jar",
                             configPath: "${env.WORKSPACE}/config/prebid-config.yaml"
                         ])
                     }
