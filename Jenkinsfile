@@ -61,8 +61,6 @@ pipeline {
                             configPath: "${env.WORKSPACE}/config/prebid-config.yaml"
                         ])
                     }
-                }
-                
             }
         }
         stage('Build and push docker images') {
@@ -92,6 +90,6 @@ pipeline {
                     recordIssues enabledForFailure: true, tool: spotBugs()
                 }
             }
-            }
+        }
     }
 }
