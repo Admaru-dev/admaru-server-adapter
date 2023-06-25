@@ -83,13 +83,6 @@ pipeline {
                     archiveArtifacts artifacts: '**/target/prebid-server*.jar',  onlyIfSuccessful: false
                 }
             }
-            script {
-                if (env.BRANCH_NAME == 'develop' || env.BRANCH_NAME =~ 'sprint-') {
-                    junit testResults: '**/target/surefire-reports/TEST-*.xml'
-                    recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
-                    recordIssues enabledForFailure: true, tool: spotBugs()
-                }
-            }
         }
     }
 }
