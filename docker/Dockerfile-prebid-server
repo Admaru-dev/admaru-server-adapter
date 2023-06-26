@@ -22,5 +22,5 @@ WORKDIR $APP_WORKDIR/$APP_NAME
 EXPOSE 8080
 
 CMD java -jar ${HEAP_OPTS} \
- -Dspring.config.additional-location=./{APP_NAME}-config.yaml \
+ -Dspring.config.additional-location=./${APP_NAME}-config.yaml \
  ${APP_NAME}.jar
