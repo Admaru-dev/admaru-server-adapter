@@ -1,0 +1,10 @@
+adapters:
+  admaru:
+    endpoint: https://ssp-dev.admaru.net/bid/rtb
+    meta-info:
+      maintainer-email: admin@admaru.com
+      app-media-types:
+        - banner
+        - video
+      supported-vendors:
+      vendor-id: 0
