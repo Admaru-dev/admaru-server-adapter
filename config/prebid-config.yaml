@@ -1,14 +1,6 @@
 status-response: "ok"
 adapters:
-  appnexus:
-    enabled: true
-  ix:
-    enabled: true
-  openx:
-    enabled: true
-  pubmatic:
-    enabled: true
-  rubicon:
+  admaru:
     enabled: true
 metrics:
   prefix: prebid
@@ -21,10 +13,10 @@ settings:
   enforce-valid-account: false
   generate-storedrequest-bidrequest-id: true
   filesystem:
-    settings-filename: /opt/admaru/config-server/basedir/prebid-app-settings.yaml
-    stored-requests-dir:
-    stored-imps-dir:
-    stored-responses-dir:
+    settings-filename: config/prebid-app-settings.yaml
+    stored-requests-dir: config/stored
+    stored-imps-dir: config/stored
+    stored-responses-dir: config/stored
     categories-dir:
 gdpr:
   default-value: 1

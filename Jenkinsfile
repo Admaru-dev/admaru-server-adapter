@@ -58,7 +58,7 @@ pipeline {
                             hosts: "applications_${env.MY_ENV}",
                             envName: "${env.MY_ENV}",
                             artifactPath: "${env.WORKSPACE}/target/prebid-server.jar",
-                            configPath: "${env.WORKSPACE}/config/prebid-config.yaml"
+                            configPath: "${env.WORKSPACE}/config"
                         ])
                     }
             }
