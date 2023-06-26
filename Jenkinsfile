@@ -20,15 +20,15 @@ pipeline {
     }
     agent any
     stages {
-        stage('Prepare build') { 
-            steps {
-                script {
-                if (env.BRANCH_NAME.startsWith('sprint-') || env.BRANCH_NAME.startsWith('release-') || env.BRANCH_NAME.startsWith('autotest-')) {
-                    sh 'cp ./prebid-server/src/main/resources/application.yml.k8s ./prebid-server/src/main/resources/application.yml'
-                    }
-                }
-            }
-        }
+        // stage('Prepare build') { 
+        //     steps {
+        //         script {
+        //         if (env.BRANCH_NAME.startsWith('sprint-') || env.BRANCH_NAME.startsWith('release-') || env.BRANCH_NAME.startsWith('autotest-')) {
+        //             sh 'cp ./prebid-server/src/main/resources/application.yml.k8s ./prebid-server/src/main/resources/application.yml'
+        //             }
+        //         }
+        //     }
+        // }
         stage('Build') {
             steps {
                 script {
