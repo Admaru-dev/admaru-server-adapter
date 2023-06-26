@@ -68,7 +68,7 @@ pipeline {
             steps {
                 script {
                      docker.withRegistry('https://780577742507.dkr.ecr.ap-northeast-2.amazonaws.com', 'ecr:ap-northeast-2:jenkins_ecr') {
-                         def dockerImage = docker.build("admaru/prebid-server:${MY_VERSION}", "--build-arg BUILD_ID=${MY_VERSION} --build-arg APP_NAME=prebid-server -f docker/Dockerfile-config-server ${WORKSPACE}")
+                         def dockerImage = docker.build("admaru/prebid-server:${MY_VERSION}", "--build-arg APP_NAME=prebid-server -f docker/Dockerfile-prebid-server ${WORKSPACE}")
                          dockerImage.push()
                          dockerImage.push('latest')
                      }
