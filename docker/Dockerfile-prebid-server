@@ -11,7 +11,7 @@ RUN adduser "$USER_NAME"
 RUN mkdir -p --mode=755 "$APP_WORKDIR/$APP_NAME/stored"
 RUN chown -R "$USER_NAME":"$USER_NAME" "$APP_WORKDIR"
 
-COPY ./${APP_NAME}/target/${APP_NAME}.jar ${APP_WORKDIR}/${APP_NAME}/${APP_NAME}.jar
+COPY ./target/${APP_NAME}.jar ${APP_WORKDIR}/${APP_NAME}/${APP_NAME}.jar
 COPY ./config/{APP_NAME}-config.yaml.k8s ${APP_WORKDIR}/${APP_NAME}/{APP_NAME}-config.yaml
 COPY ./config/{APP_NAME}-settings.yaml.k8s ${APP_WORKDIR}/${APP_NAME}/{APP_NAME}-settings.yaml
 
