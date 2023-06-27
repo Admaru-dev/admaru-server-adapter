@@ -23,7 +23,7 @@ pipeline {
         stage('Prepare build') { 
             steps {
                 script {
-                    sh 'cp ./src/main/resources/bidder-config/admaru.yml.${MY_ENV} ./src/main/resources/bidder-config/admaru.yml'
+                    sh 'cp ./src/main/resources/bidder-config/admaru.yaml.${MY_ENV} ./src/main/resources/bidder-config/admaru.yaml'
                 }
             }
         }
