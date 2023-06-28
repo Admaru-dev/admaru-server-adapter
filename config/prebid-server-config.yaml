@@ -13,10 +13,10 @@ settings:
   enforce-valid-account: false
   generate-storedrequest-bidrequest-id: true
   filesystem:
-    settings-filename: config/prebid-app-settings.yaml
-    stored-requests-dir: config/stored
-    stored-imps-dir: config/stored
-    stored-responses-dir: config/stored
+    settings-filename: ./prebid-server-settings.yaml
+    stored-requests-dir: ./stored
+    stored-imps-dir: ./stored
+    stored-responses-dir: ./stored
     categories-dir:
 gdpr:
   default-value: 1
