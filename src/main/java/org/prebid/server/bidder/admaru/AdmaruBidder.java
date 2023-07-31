@@ -29,11 +29,17 @@ import java.util.Objects;
 public class AdmaruBidder implements Bidder<BidRequest> {
 
     private final String endpointUrl;
+    private final String secondEndpointUrl;
     private final JacksonMapper mapper;
 
-    public AdmaruBidder(String endpointUrl, JacksonMapper mapper) {
+    public AdmaruBidder(String endpointUrl, String secondEndpointUrl, JacksonMapper mapper) {
         this.endpointUrl = endpointUrl;
+        this.secondEndpointUrl = secondEndpointUrl;
         this.mapper = mapper;
+    }
+
+    public AdmaruBidder(String endpointUrl, JacksonMapper mapper) {
+        this(endpointUrl, endpointUrl, mapper);
     }
 
     @Override
@@ -59,8 +65,10 @@ public class AdmaruBidder implements Bidder<BidRequest> {
 
         final BidRequest resRequest = request.toBuilder().imp(validImps).build();
 
+        String url = resRequest.getApp() != null
+                ? this.secondEndpointUrl : this.endpointUrl;
         return Result.of(
-                Collections.singletonList(BidderUtil.defaultRequest(resRequest, endpointUrl, mapper)),
+                Collections.singletonList(BidderUtil.defaultRequest(resRequest, url, mapper)),
                 errors);
     }
 
