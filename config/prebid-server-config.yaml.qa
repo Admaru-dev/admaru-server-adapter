@@ -16,15 +16,15 @@ settings:
   generate-storedrequest-bidrequest-id: true
   http:
     client:
-    endpoint: http://request-sender:8080/stored-request
-    amp-endpoint: http://request-sender:8080/stored-requeest
-    video-endpoint: http://request-sender:8080/stored-requeest
-    category-endpoint: http://request-sender:8080/stored-request
+    endpoint: http://stored-request:8080/stored-request
+    amp-endpoint: http://stored-request:8080/stored-requeest
+    video-endpoint: http://stored-request:8080/stored-requeest
+    category-endpoint: http://stored-request:8080/stored-request
   in-memory-cache:
     cache-size: 10000
     ttl-seconds: 360
     http-update:
-      endpoint: http://request-sender:8080/stored-request
+      endpoint: http://stored-request:8080/stored-request
       refresh-rate: 60000
       timeout: 2000
 gdpr:
