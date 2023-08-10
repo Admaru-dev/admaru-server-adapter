@@ -29,15 +29,11 @@ pipeline {
             }
         }
         stage('Build') {
+            when { anyOf { branch 'develop'; tag "sprint-*"; tag "release-*" } }
             steps {
                 script {
                     sh "echo ${BRANCH_NAME} ${GIT_BRANCH} ${GIT_COMMIT} ${MY_VERSION} ${MY_ENV}"
-
-                    if (env.BRANCH_NAME == 'main' || env.BRANCH_NAME.startsWith('release-')) {
-                        sh "mvn clean package -Drevision=${MY_VERSION}"
-                    } else {
-                        sh "mvn clean package -Dmaven.test.skip=true -Drevision=${MY_VERSION}"
-                    }
+                    sh "mvn clean package -Dmaven.test.skip=true -Drevision=${MY_VERSION}"
                 }
             }
         }
