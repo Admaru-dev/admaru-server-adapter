@@ -6,7 +6,7 @@ pipeline {
         CI = "false"
         MY_ENV = sh(
             returnStdout: true,
-            script: 'if [[ $BRANCH_NAME =~ "release-" ]]; then echo "prod"; elif [[ $BRANCH_NAME =~ (sprint-|autotest-) ]]; then echo "qa"; else echo "dev"; fi'
+            script: 'if [[ $BRANCH_NAME =~ "admaru-" ]]; then echo "admaru"; else echo "dev"; fi'
         ).trim()
         MY_VERSION = sh(
             returnStdout: true, 
