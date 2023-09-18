@@ -3,7 +3,11 @@ adapters:
   admaru:
     enabled: true
 metrics:
-  prefix: prebid
+  prometheus:
+    enabled: true
+    port: 8070
+    custom-labels-enabled: true
+    subsystem: pbs
 cache:
   scheme: http
   host: localhost
