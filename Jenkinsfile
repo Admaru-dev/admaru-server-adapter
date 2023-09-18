@@ -70,6 +70,21 @@ pipeline {
                 }
             }
         }
+        stage('Generate tag') {
+            when { anyOf { branch "main"; branch "production" } }
+            steps {
+                script {
+                    TAG = VersionNumber(versionNumberString: '${MY_TAG}-${BUILD_DATE_FORMATTED, "yyyy.MM.dd"}_${BUILDS_TODAY}')
+                        withEnv(["MY_VERSION=${TAG}"]) {
+                            sshagent(credentials: ['admaru-backend']) {
+                                sh 'echo "Tagging with ${MY_VERSION}"'
+                                sh "git tag ${MY_VERSION}"
+                                sh 'git push origin --tags'
+                            }
+                        }
+                }
+            }
+        }
     }
     post {
         always {
@@ -78,6 +93,11 @@ pipeline {
                     archiveArtifacts artifacts: '**/target/prebid-server*.jar',  onlyIfSuccessful: false
                 }
             }
+            script {
+                    if (env.BRANCH_NAME != 'develop') {
+                        cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenSuccess: true, cleanWhenUnstable: true, deleteDirs: true)
+                    }
+                }
         }
     }
 }
