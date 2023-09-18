@@ -12,6 +12,7 @@ pipeline {
             returnStdout: true, 
             script: 'if [[ $BRANCH_NAME =~ "admaru-" ]]; then echo "${BRANCH_NAME}"; else echo "${BRANCH_NAME}.${BUILD_ID}-SNAPSHOT"; fi'
         ).trim()
+        MY_TAG = "admaru"
     }
     options {
         disableConcurrentBuilds()
