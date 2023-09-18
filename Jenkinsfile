@@ -10,7 +10,7 @@ pipeline {
         ).trim()
         MY_VERSION = sh(
             returnStdout: true, 
-            script: 'if [[ $BRANCH_NAME =~ (release-|sprint-|autotest-) ]]; then echo "${BRANCH_NAME}"; else echo "${BRANCH_NAME}.${BUILD_ID}-SNAPSHOT"; fi'
+            script: 'if [[ $BRANCH_NAME =~ "admaru-" ]]; then echo "${BRANCH_NAME}"; else echo "${BRANCH_NAME}.${BUILD_ID}-SNAPSHOT"; fi'
         ).trim()
     }
     options {
@@ -20,16 +20,16 @@ pipeline {
     }
     agent any
     stages {
-        stage('Prepare build') { 
-            steps {
-                script {
-                    sh 'cp ./src/main/resources/bidder-config/admaru.yaml.${MY_ENV} ./src/main/resources/bidder-config/admaru.yaml'
-                    sh 'cp ./config/prebid-server-config.yaml.${MY_ENV} ./config/prebid-server-config.yaml'
-                }
-            }
-        }
+        // stage('Prepare build') { 
+        //     steps {
+        //         script {
+        //             sh 'cp ./src/main/resources/bidder-config/admaru.yaml.${MY_ENV} ./src/main/resources/bidder-config/admaru.yaml'
+        //             sh 'cp ./config/prebid-server-config.yaml.${MY_ENV} ./config/prebid-server-config.yaml'
+        //         }
+        //     }
+        // }
         stage('Build') {
-            when { anyOf { branch 'develop'; tag "sprint-*"; tag "release-*" } }
+            when { anyOf { branch 'develop'; tag "admaru-*"} }
             steps {
                 script {
                     sh "echo ${BRANCH_NAME} ${GIT_BRANCH} ${GIT_COMMIT} ${MY_VERSION} ${MY_ENV}"
@@ -59,7 +59,7 @@ pipeline {
             }
         }
         stage('Build and push docker images') {
-            when { anyOf { tag "sprint-*"; tag "release-*" } }
+            when { anyOf { tag "admaru-*"} }
             steps {
                 script {
                      docker.withRegistry('https://780577742507.dkr.ecr.ap-northeast-2.amazonaws.com', 'ecr:ap-northeast-2:jenkins_ecr') {
@@ -71,12 +71,12 @@ pipeline {
             }
         }
         stage('Generate tag') {
-            when { anyOf { branch "main"; branch "production" } }
+            when { anyOf { branch "main"} }
             steps {
                 script {
                     TAG = VersionNumber(versionNumberString: '${MY_TAG}-${BUILD_DATE_FORMATTED, "yyyy.MM.dd"}_${BUILDS_TODAY}')
                         withEnv(["MY_VERSION=${TAG}"]) {
-                            sshagent(credentials: ['admaru-backend']) {
+                            sshagent(credentials: ['admaru-server-adapter']) {
                                 sh 'echo "Tagging with ${MY_VERSION}"'
                                 sh "git tag ${MY_VERSION}"
                                 sh 'git push origin --tags'

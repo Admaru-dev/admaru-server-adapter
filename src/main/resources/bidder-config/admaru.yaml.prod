@@ -1,6 +1,7 @@
 adapters:
   admaru:
     endpoint: https://supply.admaru.com/bid/rtb
+    secondEndpoint: https://supply.admaru.com/bid/mobile
     meta-info:
       maintainer-email: admin@admaru.com
       app-media-types:

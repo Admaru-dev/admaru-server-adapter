@@ -1,7 +1,7 @@
 adapters:
   admaru:
-    endpoint: https://ssp-qa.admaru.net/bid/rtb
-    secondEndpoint: https://ssp-qa.admaru.net/bid/mobile
+    endpoint: https://ssp-dev.admaru.net/bid/rtb
+    secondEndpoint: https://ssp-dev.admaru.net/bid/mobile
     meta-info:
       maintainer-email: admin@admaru.com
       app-media-types:

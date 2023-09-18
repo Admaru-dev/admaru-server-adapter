@@ -6,6 +6,8 @@ ENV APP_NAME $APP_NAME
 ENV APP_WORKDIR="/opt/admaru"
 ENV USER_NAME="appuser"
 ENV HEAP_OPTS="-Xms512M -Xmx512M"
+ENV ENDPOINT_URL="http://ssp:8080/bid/rtb"
+ENV SECOND_ENDPOINT_URL="http://ssp:8080/bid/mobile"
 
 RUN adduser "$USER_NAME"
 RUN mkdir -p --mode=755 "$APP_WORKDIR/$APP_NAME/stored"
@@ -20,7 +22,11 @@ USER "$USER_NAME"
 WORKDIR $APP_WORKDIR/$APP_NAME
 
 EXPOSE 8080
+EXPOSE 8070
+EXPOSE 8060
 
 CMD java -jar ${HEAP_OPTS} \
  -Dspring.config.additional-location=./${APP_NAME}-config.yaml \
+ -Dadapters.admaru.endpoint=${ENDPOINT_URL} \
+ -Dadapters.admaru.secondEndpoint=${SECOND_ENDPOINT_URL} \
  ${APP_NAME}.jar
