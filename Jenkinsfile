@@ -21,14 +21,14 @@ pipeline {
     }
     agent any
     stages {
-        // stage('Prepare build') { 
-        //     steps {
-        //         script {
-        //             sh 'cp ./src/main/resources/bidder-config/admaru.yaml.${MY_ENV} ./src/main/resources/bidder-config/admaru.yaml'
-        //             sh 'cp ./config/prebid-server-config.yaml.${MY_ENV} ./config/prebid-server-config.yaml'
-        //         }
-        //     }
-        // }
+        stage('Prepare build') { 
+            steps {
+                script {
+                    // sh 'cp ./src/main/resources/bidder-config/admaru.yaml.${MY_ENV} ./src/main/resources/bidder-config/admaru.yaml'
+                    sh 'cp ./config/prebid-server-config.yaml.${MY_ENV} ./config/prebid-server-config.yaml'
+                }
+            }
+        }
         stage('Build') {
             when { anyOf { branch 'develop'; tag "admaru-*"} }
             steps {
