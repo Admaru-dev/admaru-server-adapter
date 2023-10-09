@@ -5,8 +5,8 @@ adapters:
 metrics:
   prefix: prebid
 cache:
-  scheme: http
-  host: localhost
+  scheme: https
+  host: event-logger-dev.admaru.net
   path: /cache
   query: uuid=
 auction:
